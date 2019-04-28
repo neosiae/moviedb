@@ -9,11 +9,13 @@ import Home from './pages/home'
 import Movie from './pages/movie'
 import Tv from './pages/tv'
 
+const composeEnhancers =
+	window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(
   MovieDB,
-  compose(
-    applyMiddleware(thunkMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(
+    applyMiddleware(thunkMiddleware)
   )
 )
 
