@@ -11,7 +11,7 @@ function Map ({ items }) {
   return (
     <S.Container>
       {Array.isArray(items) && items.map((item, index) => {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
           return (
             <S.LinkLeft key={item.id} to={`/${getPage(currentTab, TAB_FILTERS)}/${item.id}`}>
               <Item item={item} />
