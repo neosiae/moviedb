@@ -80,19 +80,21 @@ export function receiveSearchContent (isLoading, json) {
 }
 
 const innerFn = debounce(async (dispatch, getState, ...args) => {
-  const query = getState().app.query
+  const { isSearching, query } = getState().app
 
-  const [ type ] = args
+  if (isSearching) {
+    const [ type ] = args
 
-  dispatch(loadSearchContent(true))
-
-  const [err, data] = await to(fetch(search(type, query)))
-
-  if (err) console.error(err)
-
-  const json = await data.json()
-
-  dispatch(receiveSearchContent(false, json))
+    dispatch(loadSearchContent(true))
+  
+    const [err, data] = await to(fetch(search(type, query)))
+  
+    if (err) console.error(err)
+  
+    const json = await data.json()
+  
+    dispatch(receiveSearchContent(false, json))
+  }
 }, 1000)
 
 export const fetchSearchContent = (...args) => (dispatch, getState) =>

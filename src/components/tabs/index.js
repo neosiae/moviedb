@@ -12,13 +12,13 @@ export default function Tabs ({ location }) {
   const tabFilter = useActions(filter => setTabFilter(filter), [])
   const fetchContent = useActions(type => fetchTopContent(type), [])
   const fetchSearch = useActions(type => fetchSearchContent(type), [])
-  const shouldStartSearch = useActions(isSearching => shouldSearch(isSearching), [])
+  const shouldStartSearch = useActions(query => shouldSearch(query), [])
   
   useEffect(() => {
     if (currentTab === TAB_FILTERS.SHOW_TOP_TV) {
-      if (isSearching !== true) fetchContent('tv')
+      if (isSearching === false) fetchContent('tv')
     } else {
-      if (isSearching !== true) fetchContent('movie')
+      if (isSearching === false) fetchContent('movie')
     }
   }, [currentTab, isSearching, location])
 
@@ -28,11 +28,11 @@ export default function Tabs ({ location }) {
 
   useEffect(() => {
     if (currentTab === TAB_FILTERS.SHOW_TOP_TV) {
-      if (isSearching) fetchSearch('tv')
+      fetchSearch('tv')
     } else {
-      if (isSearching) fetchSearch('movie')
+      fetchSearch('movie')
     }
-  }, [currentTab, isSearching])
+  }, [currentTab, searchQuery])
   
   return (
     <div>

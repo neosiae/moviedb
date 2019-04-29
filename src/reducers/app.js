@@ -13,13 +13,16 @@ const initialState = {
   query: '',
   items: null,
   isLoading: true,
-  startSearch: false,
+  isSearching: false
 }
 
 export default function app (state = initialState, action) {
   switch (action.type) {
     case LOADING_TOP_CONTENT:
-      return { ...state, isLoading: action.isLoading }
+      return { 
+        ...state, 
+        isLoading: action.isLoading 
+      }
     case RECEIVE_TOP_CONTENT:
       return { 
         ...state, 
